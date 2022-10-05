@@ -1,0 +1,4 @@
+jdbc:h2:tcp://localhost/./jpa-lecture-basic
+
+// ./ : H2 설치된 경로의 bin 디렉토리에 DB 파일 생성
+// ~/ : 루트에다가 DB 파일 생성

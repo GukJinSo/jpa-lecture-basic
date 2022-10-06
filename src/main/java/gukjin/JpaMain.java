@@ -37,7 +37,10 @@ public class JpaMain {
             em.clear();
 
             Member findMember = em.find(Member.class, member.getId());
-            findMember.setTeam(team2);
+            List<Member> members = findMember.getTeam().getMembers();
+            for (Member e : members) {
+                System.out.println("=========="+ e.getId());
+            }
 
             tx.commit();
         }

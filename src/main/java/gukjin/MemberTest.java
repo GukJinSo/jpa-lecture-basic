@@ -1,13 +1,17 @@
 package gukjin;
 
+import gukjin.RoleType;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-
-public class Member {
+@SequenceGenerator(name = "member_seq_generator", sequenceName = "member_seq")
+@Table(name = "MEMBER_TEST")
+public class MemberTest {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_seq_generator")
     private Long id;
 
     @Column(name = "name")

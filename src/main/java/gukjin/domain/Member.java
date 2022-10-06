@@ -1,20 +1,32 @@
 package gukjin.domain;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Member {
 
     @Id @GeneratedValue @Column(name = "MEMBER_ID")
     private Long id;
+
+    @Column(name = "USERNAME")
     private String name;
+
     private String city;
     private String street;
     private String zipcode;
+
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
 
     public Long getId() {
         return id;

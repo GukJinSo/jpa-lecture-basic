@@ -17,9 +17,11 @@ public class Main {
         tx.begin();
         try{
 
+
+
             // 모든 회원 조회
-            List<Member> result = em.createQuery("select m from Member as m", Member.class).getResultList();
-            result.stream().forEach((member)-> System.out.println(member.getId()));
+            // List<Member> result = em.createQuery("select m from Member as m", Member.class).getResultList();
+            // result.stream().forEach((member)-> System.out.println(member.getId()));
 
             // 수정
             // Member member = em.find(Member.class, 1L);

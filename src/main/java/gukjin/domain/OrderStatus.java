@@ -1,5 +1,5 @@
 package gukjin.domain;
 
-public enum OrderState {
+public enum OrderStatus {
     ORDER, CANCEL
 }

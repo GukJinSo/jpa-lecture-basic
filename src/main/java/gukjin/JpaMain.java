@@ -1,9 +1,6 @@
 package gukjin;
 
-import gukjin.domain.Member;
-import gukjin.domain.Order;
-import gukjin.domain.OrderItem;
-import gukjin.domain.Team;
+import gukjin.domain.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -23,7 +20,13 @@ public class JpaMain {
         tx.begin();
         try{
 
-            Order order = new Order();
+            Movie movie = new Movie();
+            movie.setActor("구단미");
+            movie.setDirector("소국진");
+            movie.setName("자바의 신");
+            em.persist(movie);
+
+
             tx.commit();
         }
         catch(Exception e) {

@@ -10,6 +10,10 @@
         <class>gukjin.domain.Member</class>
         <class>gukjin.domain.Item</class>
         <class>gukjin.domain.OrderItem</class>
+        <class>gukjin.domain.SuperItem</class>
+        <class>gukjin.domain.Album</class>
+        <class>gukjin.domain.Book</class>
+        <class>gukjin.domain.Movie</class>
 <!--        <class>gukjin.domain.Team</class>-->
         <properties>
             <!-- 필수 속성 -->

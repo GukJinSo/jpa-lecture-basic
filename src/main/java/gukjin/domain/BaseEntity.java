@@ -1,5 +1,7 @@
 package gukjin.domain;
 
+import org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader;
+
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 

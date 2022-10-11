@@ -3,9 +3,9 @@ package gukjin.domain;
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "DTYPE")
-public class SuperItem {
+public abstract class SuperItem {
     @Id @GeneratedValue private int id;
     private String name;
     private String price;

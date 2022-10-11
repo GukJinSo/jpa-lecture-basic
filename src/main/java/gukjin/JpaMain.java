@@ -20,12 +20,17 @@ public class JpaMain {
         tx.begin();
         try{
 
-            Movie movie = new Movie();
-            movie.setActor("구단미");
-            movie.setDirector("소국진");
-            movie.setName("자바의 신");
-            em.persist(movie);
+            Book book = new Book();
+            book.setAuthor("소국진");
+            book.setName("자바의 신");
+            em.persist(book);
 
+            em.flush();
+            em.clear();
+
+            Item item = em.find(Book.class, book.getId());
+            System.out.println(item);
+            System.out.println(book);
 
             tx.commit();
         }

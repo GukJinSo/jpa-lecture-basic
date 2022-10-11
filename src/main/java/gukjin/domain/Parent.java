@@ -34,7 +34,7 @@ public class Parent {
         this.childList = childList;
     }
 
-    @OneToMany(mappedBy = "parent")
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Child> childList = new ArrayList<>();
 
     private void addChildList(Child child){

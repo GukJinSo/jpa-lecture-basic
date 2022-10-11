@@ -13,12 +13,16 @@
         <class>gukjin.domain.Album</class>
         <class>gukjin.domain.Book</class>
         <class>gukjin.domain.Team</class>
+        <class>gukjin.domain.Movie</class>
+        <class>gukjin.domain.Parent</class>
+        <class>gukjin.domain.Child</class>
+
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
             <property name="javax.persistence.jdbc.user" value="sa"/>
             <property name="javax.persistence.jdbc.password" value="sa"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/jpa-lecture-basic"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/./jpa-lecture-basic"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
 
             <!-- 옵션 -->

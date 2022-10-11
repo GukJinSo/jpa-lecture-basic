@@ -20,6 +20,23 @@ public class JpaMain {
 
         tx.begin();
         try{
+            Child child1 = new Child();
+            child1.setName("큰아들");
+            Child child2 = new Child();
+            child2.setName("작은아들");
+            Parent parent = new Parent();
+            parent.setName("아빠");
+
+            child1.addParent(parent);
+            child2.addParent(parent);
+
+            em.persist(parent);
+
+            em.flush();
+            em.clear();
+
+            Parent findParent = em.find(Parent.class, parent.getId());
+            em.remove(findParent);
 
             tx.commit();
         }

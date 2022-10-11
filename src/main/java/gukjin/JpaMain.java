@@ -1,6 +1,7 @@
 package gukjin;
 
 import gukjin.domain.*;
+import org.hibernate.annotations.common.reflection.XMember;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -20,17 +21,14 @@ public class JpaMain {
         tx.begin();
         try{
 
-            Book book = new Book();
-            book.setAuthor("소국진");
-            book.setName("자바의 신");
-            em.persist(book);
+            Member member = new Member();
+            member.setName("소국진");
+            em.persist(member);
 
             em.flush();
             em.clear();
 
-            Item item = em.find(Book.class, book.getId());
-            System.out.println(item);
-            System.out.println(book);
+            Member findMember = em.getReference(Member.class, member.getId());
 
             tx.commit();
         }

@@ -21,23 +21,6 @@ public class JpaMain {
         tx.begin();
         try{
 
-
-            Team team = new Team();
-            team.setName("아스날");
-
-            Member member = new Member();
-            member.setName("소국진");
-            member.setTeam(team);
-
-            em.persist(team);
-            em.persist(member);
-
-            em.flush();
-            em.clear();
-
-            Member findMember = em.find(Member.class, member.getId());
-            System.out.println("findMember = " +findMember.getTeam().getClass());
-
             tx.commit();
         }
         catch(Exception e) {

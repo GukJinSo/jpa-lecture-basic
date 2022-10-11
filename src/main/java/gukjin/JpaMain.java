@@ -30,6 +30,7 @@ public class JpaMain {
 
             Member findMember = em.getReference(Member.class, member.getId());
 
+
             tx.commit();
         }
         catch(Exception e) {

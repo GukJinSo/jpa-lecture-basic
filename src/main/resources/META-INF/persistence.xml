@@ -12,6 +12,7 @@
         <class>gukjin.domain.OrderItem</class>
         <class>gukjin.domain.Album</class>
         <class>gukjin.domain.Book</class>
+        <class>gukjin.domain.Team</class>
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>

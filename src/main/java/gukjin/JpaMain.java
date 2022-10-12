@@ -31,6 +31,11 @@ public class JpaMain {
             em.persist(team);
             em.persist(member);
 
+            Member member2 = new Member();
+            member2.setName("구단미");
+            member2.setAddress(new Address(member.getAddress().getCity(), member.getAddress().getStreet(), member.getAddress().getZipcode()));
+            em.persist(member2);
+
             tx.commit();
         }
         catch(Exception e) {

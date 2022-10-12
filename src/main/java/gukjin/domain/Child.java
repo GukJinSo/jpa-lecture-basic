@@ -9,7 +9,7 @@ public class Child {
     @Id @GeneratedValue private int id;
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PARENT_ID")
     private Parent parent;
 

@@ -11,15 +11,40 @@ public class Member {
     @Id @GeneratedValue
     private Long id;
     private String name;
-    private String city;
-    private String street;
-    private String zipcode;
 
+    @Embedded
+    private Address address;
 
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name="city",
+                    column=@Column(name = "work_city")),
+            @AttributeOverride(name="street",
+                    column=@Column(name = "work_street")),
+            @AttributeOverride(name="zipcode",
+                    column=@Column(name = "work_zipcode"))
+    })
+    private Address workAddress;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_ID")
     private Team team;
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Address getWorkAddress() {
+        return workAddress;
+    }
+
+    public void setWorkAddress(Address workAddress) {
+        this.workAddress = workAddress;
+    }
 
     public Team getTeam() {
         return team;
@@ -45,27 +70,4 @@ public class Member {
         this.name = name;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getZipcode() {
-        return zipcode;
-    }
-
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
-    }
 }

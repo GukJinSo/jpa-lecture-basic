@@ -20,23 +20,16 @@ public class JpaMain {
 
         tx.begin();
         try{
-            Child child1 = new Child();
-            child1.setName("큰아들");
-            Child child2 = new Child();
-            child2.setName("작은아들");
-            Parent parent = new Parent();
-            parent.setName("아빠");
 
-            child1.addParent(parent);
-            child2.addParent(parent);
+            Member member = new Member();
+            member.setAddress(new Address("Daego", "Yulha Street", "1042-3"));
+            member.setWorkAddress(new Address("Seoul", "Good Street", "1000-4"));
+            member.setName("소국진");
 
-            em.persist(parent);
-
-            em.flush();
-            em.clear();
-
-            Parent findParent = em.find(Parent.class, parent.getId());
-            em.remove(findParent);
+            Team team = new Team("개발부");
+            member.setTeam(team);
+            em.persist(team);
+            em.persist(member);
 
             tx.commit();
         }

@@ -24,6 +24,9 @@ gradle-app.setting
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 
+# InteliJ
+out/
+
 ### Gradle Patch ###
 # Java heap dump
 *.hprof

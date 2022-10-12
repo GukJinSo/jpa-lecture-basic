@@ -26,6 +26,7 @@ gradle-app.setting
 
 # InteliJ
 out/
+.idea/
 
 ### Gradle Patch ###
 # Java heap dump

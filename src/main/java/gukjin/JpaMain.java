@@ -7,6 +7,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -23,37 +26,13 @@ public class JpaMain {
         tx.begin();
         try{
 
-            Member member = new Member();
-            member.setAddress(new Address("Daego", "Yulha Street", "1042-3"));
-            member.setWorkAddress(new Address("Seoul", "Good Street", "1000-4"));
-            member.setName("소국진");
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Member> query = cb.createQuery(Member.class);
+            Root<Member> m = query.from(Member.class);
+            CriteriaQuery<Member> cq = query.select(m).where(cb.like(m.get("username"), "kim"));
+            List<Member> resultList = em.createQuery(cq).getResultList();
 
-            Team team = new Team("개발부");
-            member.setTeam(team);
-            em.persist(team);
-            em.persist(member);
-
-            Member member2 = new Member();
-            member2.setName("구단미");
-            member2.setAddress(new Address("Busan", member.getAddress().getStreet(), member.getAddress().getZipcode()));
-            em.persist(member2);
-
-            member.getFavoriteFoods().add("김치");
-            member.getFavoriteFoods().add("국밥");
-            member.getFavoriteFoods().add("깍두기");
-            member.getFavoriteFoods().add("깍두기");
-
-            em.flush();
-            em.clear();
-
-            Member findMember = em.find(Member.class, member.getId());
-            Set<String> favoriteFoods = findMember.getFavoriteFoods();
-            for (String favoriteFood : favoriteFoods) {
-                System.out.println(favoriteFood);
-            }
-
-            String fullAddress = findMember.getAddress().getFullAddress();
-            System.out.println(fullAddress);
+//            List<Member> resultList = em.createQuery("select m from Member m where m.name like '%kim%'", Member.class).getResultList();
 
             tx.commit();
         }

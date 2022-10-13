@@ -12,7 +12,8 @@ public class Member {
 
     @Id @GeneratedValue
     private Long id;
-    private String name;
+
+    private String username;
 
     @Embedded
     private Address address;
@@ -89,12 +90,11 @@ public class Member {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
-
 }

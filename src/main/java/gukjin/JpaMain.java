@@ -8,7 +8,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -33,8 +35,25 @@ public class JpaMain {
 
             Member member2 = new Member();
             member2.setName("구단미");
-            member2.setAddress(new Address(member.getAddress().getCity(), member.getAddress().getStreet(), member.getAddress().getZipcode()));
+            member2.setAddress(new Address("Busan", member.getAddress().getStreet(), member.getAddress().getZipcode()));
             em.persist(member2);
+
+            member.getFavoriteFoods().add("김치");
+            member.getFavoriteFoods().add("국밥");
+            member.getFavoriteFoods().add("깍두기");
+            member.getFavoriteFoods().add("깍두기");
+
+            em.flush();
+            em.clear();
+
+            Member findMember = em.find(Member.class, member.getId());
+            Set<String> favoriteFoods = findMember.getFavoriteFoods();
+            for (String favoriteFood : favoriteFoods) {
+                System.out.println(favoriteFood);
+            }
+
+            String fullAddress = findMember.getAddress().getFullAddress();
+            System.out.println(fullAddress);
 
             tx.commit();
         }

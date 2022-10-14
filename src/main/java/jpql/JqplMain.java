@@ -27,10 +27,16 @@ public class JqplMain {
             member2.setAge(24);
             em.persist(member2);
 
+            Team team = new Team();
+            team.setName("아스날");
+            member.setTeam(team);
+            member2.setTeam(team);
+            em.persist(team);
+
             em.flush();
             em.clear();
 
-            String query = "select function('group_concat', m.username) from Member m";
+            String query = "select m.username from Team t join t.members m";
             em.createQuery(query, String.class).getResultList().stream().forEach(System.out::println);
 
             tx.commit();

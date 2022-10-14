@@ -1,12 +1,9 @@
 package jpql;
 
 import gukjin.domain.Book;
-import gukjin.domain.Item;
 import jpql.domain.*;
 
 import javax.persistence.*;
-import java.util.Arrays;
-import java.util.List;
 
 public class JqplMain {
     public static void main(String[] args) {
@@ -21,25 +18,20 @@ public class JqplMain {
             Member member = new Member();
             member.setUsername("소국진");
             member.setMemberType(MemberType.ADMIN);
-            member.setAge(10);
+            member.setAge(29);
             em.persist(member);
 
-            Book book = new Book();
-            book.setName("JPA");
-            book.setAuthor("소국진");
-            em.persist(book);
+            Member member2 = new Member();
+            member2.setUsername("구단미");
+            member2.setMemberType(MemberType.USER);
+            member2.setAge(24);
+            em.persist(member2);
 
             em.flush();
             em.clear();
 
-            String query =
-                    "select "+
-                            "case when m.age <= 10 then '학생요금' "+
-                                "when m.age >= 60 then '경로요금' "+
-                                "else '일반요금' "+
-                            "end "+
-                    "from Member m";
-            em.createQuery(query, String.class).getResultList().stream().forEach(e -> System.out.println(e));
+            String query = "select function('group_concat', m.username) from Member m";
+            em.createQuery(query, String.class).getResultList().stream().forEach(System.out::println);
 
             tx.commit();
         }

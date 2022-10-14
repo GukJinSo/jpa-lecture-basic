@@ -1,5 +1,7 @@
 package jpql;
 
+import gukjin.domain.Book;
+import gukjin.domain.Item;
 import jpql.domain.*;
 
 import javax.persistence.*;
@@ -17,18 +19,35 @@ public class JqplMain {
         tx.begin();
         try{
             Member member = new Member();
-            Team team = new Team();
-            team.setName("아스날");
-            member.setUsername("아스날");
-            member.addTeam(team);
-            em.persist(team);
+            member.setUsername("소국진");
+            member.setMemberType(MemberType.ADMIN);
             em.persist(member);
+
+            Book book = new Book();
+            book.setName("JPA");
+            book.setAuthor("소국진");
+            em.persist(book);
 
             em.flush();
             em.clear();
 
-            String query = "select m from Member m, Team t Where t.name = m.username";
-            System.out.println(em.createQuery(query, Member.class).getResultList().get(0));
+
+
+//            em.createQuery("select i from Item i where type(i) = Book", Item.class) //@DiscriminatorValue와 연관
+//                    .getResultList()
+//                    .stream()
+//                    .forEach(item -> System.out.println(item.getName()));
+
+//            String query = "select m.username, TRUE, 'Hello' from Member m "
+//                        + "where m.type = :userType";
+//            List<Object[]> resultList = em.createQuery(query).setParameter("userType", MemberType.ADMIN).getResultList();
+//            for (Object[] o : resultList) {
+//                System.out.println(o[0]);
+//                System.out.println(o[1]);
+//                System.out.println(o[2]);
+//            }
+
+
 
             tx.commit();
         }

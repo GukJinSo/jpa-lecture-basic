@@ -18,6 +18,17 @@ public class Member {
         this.setTeam(team);
     }
 
+    @Enumerated(EnumType.STRING)
+    private MemberType type;
+
+    public MemberType getMemberType() {
+        return type;
+    }
+
+    public void setMemberType(MemberType type) {
+        this.type = type;
+    }
+
     public Long getId() {
         return id;
     }

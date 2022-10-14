@@ -8,6 +8,8 @@
         <class>jpql.domain.Team</class>
         <class>jpql.domain.Order</class>
         <class>jpql.domain.Product</class>
+        <class>gukjin.domain.Item</class>
+        <class>gukjin.domain.Book</class>
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>

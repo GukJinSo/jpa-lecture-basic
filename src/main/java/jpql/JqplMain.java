@@ -21,6 +21,7 @@ public class JqplMain {
             Member member = new Member();
             member.setUsername("소국진");
             member.setMemberType(MemberType.ADMIN);
+            member.setAge(10);
             em.persist(member);
 
             Book book = new Book();
@@ -31,23 +32,14 @@ public class JqplMain {
             em.flush();
             em.clear();
 
-
-
-//            em.createQuery("select i from Item i where type(i) = Book", Item.class) //@DiscriminatorValue와 연관
-//                    .getResultList()
-//                    .stream()
-//                    .forEach(item -> System.out.println(item.getName()));
-
-//            String query = "select m.username, TRUE, 'Hello' from Member m "
-//                        + "where m.type = :userType";
-//            List<Object[]> resultList = em.createQuery(query).setParameter("userType", MemberType.ADMIN).getResultList();
-//            for (Object[] o : resultList) {
-//                System.out.println(o[0]);
-//                System.out.println(o[1]);
-//                System.out.println(o[2]);
-//            }
-
-
+            String query =
+                    "select "+
+                            "case when m.age <= 10 then '학생요금' "+
+                                "when m.age >= 60 then '경로요금' "+
+                                "else '일반요금' "+
+                            "end "+
+                    "from Member m";
+            em.createQuery(query, String.class).getResultList().stream().forEach(e -> System.out.println(e));
 
             tx.commit();
         }

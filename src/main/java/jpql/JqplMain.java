@@ -1,11 +1,9 @@
 package jpql;
 
-import jpql.domain.Address;
-import jpql.domain.Member;
-import jpql.domain.MemberDto;
-import jpql.domain.Order;
+import jpql.domain.*;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.List;
 
 public class JqplMain {
@@ -18,17 +16,19 @@ public class JqplMain {
 
         tx.begin();
         try{
-
             Member member = new Member();
-            member.setUsername("소국진");
+            Team team = new Team();
+            team.setName("아스날");
+            member.setUsername("아스날");
+            member.addTeam(team);
+            em.persist(team);
             em.persist(member);
 
             em.flush();
             em.clear();
 
-            List<MemberDto> members = em.createQuery("SELECT new jpql.domain.MemberDto(m.id, m.username) FROM Member m", MemberDto.class).getResultList();
-            System.out.println(members.get(0).getId());
-            //em.createQuery("select o.address from Order o", Address.class).getResultList();
+            String query = "select m from Member m, Team t Where t.name = m.username";
+            System.out.println(em.createQuery(query, Member.class).getResultList().get(0));
 
             tx.commit();
         }

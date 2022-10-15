@@ -22,29 +22,25 @@ public class JqplMain {
 
             Member member = new Member();
             member.setUsername("소국진");
-            member.setMemberType(MemberType.ADMIN);
-            member.setAge(29);
-            member.setTeam(team);
+            member.setAge(30);
+            Member member2 = new Member();
+            member2.setUsername("차차");
+            member2.setAge(25);
+            Member member3 = new Member();
+            member3.setUsername("치치");
+            member3.setAge(20);
 
-            em.persist(team);
             em.persist(member);
+            em.persist(member2);
+            em.persist(member3);
 
-            em.flush();
-            em.clear();
+            String sql = "update Member m set m.age = 20";
+            int resultCount = em.createQuery(sql).executeUpdate();
+            System.out.println(resultCount);
 
-//            엔티티 직접 사용 - 외래키 값
-            Team findTeam = em.find(Team.class, 1L);
-            String query = "select m from Member m where m.team = :entity";
-            Member findMember = em.createQuery(query, Member.class)
-                    .setParameter("entity", findTeam)
-                    .getSingleResult();
-
-
-//            엔티티 직접 사용 - 기본 키 값
-//            String query = "select m from Member m where m = :entity";
-//            Member findMember = em.createQuery(query, Member.class)
-//                    .setParameter("entity", member) // 엔티티를 직접 던지더라도 pk키로 동작
-//                    .getSingleResult();
+            System.out.println(member.getAge());
+            System.out.println(member2.getAge());
+            System.out.println(member3.getAge());
 
             tx.commit();
         }

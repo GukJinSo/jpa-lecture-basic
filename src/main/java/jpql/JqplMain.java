@@ -20,49 +20,31 @@ public class JqplMain {
             Team team = new Team();
             team.setName("아스날");
 
-            Team team2 = new Team();
-            team2.setName("첼시");
-
             Member member = new Member();
             member.setUsername("소국진");
             member.setMemberType(MemberType.ADMIN);
             member.setAge(29);
             member.setTeam(team);
 
-            Member member2 = new Member();
-            member2.setUsername("구단미");
-            member2.setMemberType(MemberType.USER);
-            member2.setAge(24);
-            member2.setTeam(team);
-
-            Member member3 = new Member();
-            member3.setUsername("차차");
-            member3.setMemberType(MemberType.USER);
-            member3.setAge(11);
-            member3.setTeam(team2);
-
-            team.getMembers().add(member);
-            team.getMembers().add(member2);
-            team2.getMembers().add(member3);
-
             em.persist(team);
-            em.persist(team2);
             em.persist(member);
-            em.persist(member2);
-            em.persist(member3);
 
             em.flush();
             em.clear();
 
-            String query = "SELECT t from Team t";
-            List<Team> teams = em.createQuery(query, Team.class).getResultList();
+//            엔티티 직접 사용 - 외래키 값
+            Team findTeam = em.find(Team.class, 1L);
+            String query = "select m from Member m where m.team = :entity";
+            Member findMember = em.createQuery(query, Member.class)
+                    .setParameter("entity", findTeam)
+                    .getSingleResult();
 
-            for (Team t : teams) {
-                System.out.println("team = "+t.getName());
-                for (Member m : t.getMembers()) {
-                    System.out.println(m.getUsername());
-                }
-            }
+
+//            엔티티 직접 사용 - 기본 키 값
+//            String query = "select m from Member m where m = :entity";
+//            Member findMember = em.createQuery(query, Member.class)
+//                    .setParameter("entity", member) // 엔티티를 직접 던지더라도 pk키로 동작
+//                    .getSingleResult();
 
             tx.commit();
         }
